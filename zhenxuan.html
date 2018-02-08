@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>珍选</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="apple-touch-icon-precomposed" href="http://res.zhenimg.com/mzhenpin/statics/image/apple_logo.png"/>
+    <script>
+        (function (doc, win) {
+            var htmlFont = function () {
+                var docEl = doc.documentElement, l = docEl.clientWidth, f;
+                f = l / 15;
+                l > 750 ? docEl.style.fontSize = 50 + "px" : docEl.style.fontSize = f + "px"
+            };
+            htmlFont();
+            win.addEventListener("resize", htmlFont, false)
+        })(document, window)
+    </script>
+    <style type="text/css">
+        * {padding: 0;margin: 0;}
+        body {-webkit-tap-highlight-color: rgba(255, 255, 255, 0);font-family: sans-serif;font-size: .24rem;}
+        table { border-spacing: 0;border-collapse: collapse}
+        td, th {word-wrap: break-word}
+        ul, li {list-style: none}
+        img, fieldset { border: none;display: block;}
+        img {width: 100%;}
+        input, select, textarea {vertical-align: middle;border: 0 none;display: block;outline: none;}
+        header, nav, section, footer {display: block;}
+        a {text-decoration: none;display: block;color: #313131;}
+        input[type="submit"], input[type="reset"], input[type="search"], input[type="button"], button, textarea { -webkit-appearance: none;}
+        h1, h2, h3, h4, h5, h6, strong {font-weight: normal;}
+        em, var {font-style: normal;}
+        /*返回按钮*/
+        header {position: fixed;top: 0;left: 0;width: 100%;z-index: 999;}
+        .cheek1 {border: #232323 solid 1px;-webkit-border-radius: 3px;-webkit-box-shadow: inset 0 0 3px rgba(111, 111, 111, 1);}
+        .titleWrap {position: relative;font-size: 18px;text-align: center;height: 45px;line-height: 45px;background: -webkit-gradient(linear, left top, left bottom, from(#353535), to(#2c2c2c));-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);color: #fff;}
+        .titleName {position: absolute;top: 0;left: 50%;display: block;width: 180px;margin-left: -90px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+        .a-back {position: absolute;top: 7px;left: 8px;width: 62px;height: 32px;}
+        .a-back span {width: 38px;height: 30px;line-height: 30px;font-size: 15px;color: #fff;padding-left: 22px;display: block;background: url(http://res.zhenimg.com/mzhenpin/statics/image/icon.png) -161px 7px no-repeat;background-size: 175px 150px;text-align: left;}
+
+        /*下载app*/
+        .downloadApp {width: 15rem;height: 2.8rem;position: relative;margin: 0 auto;}
+        .topArea {width: 15rem;height: 2.8rem;position: fixed;overflow: hidden;top: 0;z-index: 100;}
+        .topArea span {  width: 1.12rem;  height: 1rem;  position: absolute;  top: 0;  right: 0;  z-index: 101;  display: block;  text-indent: -999rem;  }
+        .topArea img {  width: 100%;  display: block;  }
+        /*海外直邮样*/
+        .global_tag {  display: block;  position: absolute;  top: 0;  left: 0; z-index: 1;}
+        .global_tag6 {  width: 1rem;  height: 1rem;  background: url(http://zhenimg.com/marketpic/appimg/2016newyear/qqmsd_icon.png) no-repeat;  position: absolute;  top: 0;  left: .4rem;  background-size: 100%;  }
+        /*售罄*/
+        .sold-out{display:inline-block;width:2rem;height:2rem;background:url(https://pic1.zhen.com/appimg/zmjh2016/sold_out_bg.png) no-repeat;background-size:100%;position: absolute;top: 50%;left: 50%;margin-left: -1rem;margin-top: -1rem;}
+        /*开始*/
+        .bgbody {  min-width: 6.4rem;  width: 100%;  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  font-family: sans-serif;  }
+        .df-box {  min-width: 320px;  max-width: 750px;  width: 100%;  margin: 0 auto;  overflow: hidden;  clear: both;  color: #666;  background: #ededed;}
+        .df-box img {  width: 100%;  display: block;  }
+        .zhen_part{width: 15rem;margin-bottom: 0.32rem;height: 11.88rem;}
+        .no_more{width: 13.8rem;margin: 1.2rem auto 0.5rem;text-align: center;border-top: 1px solid #e7e7e7;}
+        .no_more span{font-size:0.48rem;color: #9a9a9a;padding: 0 0.2rem;background: #ededed;position: relative;top:-0.35rem;}
+        .fixd-box { width: 15%; max-width: 40px; height: 40px; position: fixed; bottom: 50px; right: 16px;background:url(https://pic1.zhen.com/appimg/xq-zhen/to_Top_day.png) no-repeat 0 0; background-size: 100%; display: none; z-index: 102}
+    </style>
+</head><body>
+<!--下载-->
+<div class="downloadApp">
+    <div class="topArea">
+        <span id="aClose">关闭</span>
+        <a href="javascript:void(0)" id="decideApp"><img src="https://pic2.zhen.com/marketpic/appimg/app_mImg/topBanner_bg.png"/></a>
+    </div>
+</div>
+<div class="bgbody">
+    <div class="df-box">
+        <!-- 策划专题-->
+          <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/25_KingdomWomen.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/nverguo.jpg"/>
+            </a>
+          </div>
+          <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/24_springbegins.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/24_springbegins.jpg"/>
+            </a>
+          </div>
+          <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/131_airportShow.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/airport_zhen.jpg"/>
+            </a>
+          </div>
+         <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/129Top_luxurygoods.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/129Top_luxurygoodszhan.jpg"/>
+            </a>
+      </div>
+       <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/goddess_test.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/womenAngle.jpg"/>
+            </a>
+      </div>
+     
+      <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/ManGod_test.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/boyGad.jpg"/>
+            </a>
+      </div>
+     <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/122loveIngMr.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/loveIngMr.jpg"/>
+            </a>
+      </div>
+
+
+      <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/Former_Three117.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/Former_Three117zhen.jpg"/>
+            </a>
+      </div>
+     <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/110SevenStyle.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/sevenStyle_10.jpg"/>
+            </a>
+      </div>
+      <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/partyfcous0108.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/sevenStyle_101.jpg"/>
+            </a>
+      </div>
+      <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Starsame_style.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/Starsame_stylehead.gif"/>
+            </a>
+        </div>
+<!-- 
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/special_kenzo.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/kenzo1.gif"/>
+            </a>
+        </div>
+       <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_moreschi_1011.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/moreschi_zhen_11.jpg"/>
+            </a>
+        </div>
+          <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/Plan_bag817.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/珍选815bag_zhen.jpg"/>
+            </a>
+        </div>
+          <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/816_zhenSale.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/816_zhenSale_zhen.jpg"/>
+            </a>
+        </div>
+         <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/plan_scarves822.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/822_serse2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/920_plainErnoLaszlo.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/ErnoLaszlo_zhen.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/pollini_time0906.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_pollini.jpg"/>
+            </a>
+        </div>
+         <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/907_plainJGG.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Jgg_zhen.jpg"/>
+            </a>
+        </div>
+         <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/902whiteShoesPlan.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/902whiteShoesPlan.jpg"/>
+            </a>
+        </div>
+         <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/903Bicycle_Fashion.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Bicycle_Fashion903.jpg"/>
+            </a>
+        </div>
+        
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/wolf_two0821.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_zhanlang.jpg"/>
+            </a>
+        </div>
+        
+         
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/814Downia_Special.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/814Downia_zhen.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/xiha_style803.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_xiha803.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/brand_Roam801.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/roar_zhenxuan.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_chinese_new_sing.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_naying.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_mylife0726.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_mylife0727.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part testPin">
+            <a href="https://msale.zhen.com/activity/zhen_mylife0724.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_mylife0724.jpg"/>
+            </a>
+        </div> -->
+        <!--<div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/2017Double11MainVenue.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen-pasotti-for-by-creations.jpg"/>
+            </a>
+        </div>
+        <!--<div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/Pasotti_for_By_Creations.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen-pasotti-for-by-creations.jpg"/>
+            </a>
+        </div>-->
+        <!-- 策划专题结束-->
+        <!-- <div class="zhen_part" onclick="toSearch(2,'382','Rick Owens','','')">
+            <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/RickOwens-6032.jpg"/>
+        </div>
+        <div class="zhen_part" onclick="toSearch(2,'378','Victoria Beckham','','')">
+            <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/VictoriaBeckham-6032.jpg"/>
+        </div>
+        <div class="zhen_part" onclick="toSearch(2,'68','Marc Jacobs','','')">
+            <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_jacobs0606.jpg"/>
+        </div>
+        <div class="zhen_part" onclick="toSearch(2,'1614','Salar','','')">
+            <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_salar0523.jpg"/>
+        </div>-->
+
+        <!-- 测试-->
+        <!--
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen-RickOwens603.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/RickOwens-6032.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen-VictoriaBeckham603.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/VictoriaBeckham-6032.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_jacobs0606.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_jacobs0606.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_salar0523.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_salar0523.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part" onclick="toSearch(2,'13','','','')">
+            <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_pierre0525.jpg"/>
+        </div>-->
+        <!--
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_pierre0525.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_pierre0525.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_walexander0522.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_walexander0522.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_MrsItaly519.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/MrsItaly2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Canali527.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/Canali-5272.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_RedValentino526.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/RedValentino526.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_DirkBikkembergs519.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/DirkBikkembergs2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Buscemi513.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_Buscemi2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_ChristianLouboutin601.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Christian-Louboutin6012.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Etro604.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Etro-6041.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_iceberg0523.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_iceberg0523.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Lancel607.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/lancel_607.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Philipp-Plein524.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_Philipp-Plein523.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_jimmy0531.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_jimmy0531.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_balen511.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zen_Balenciaga2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_nipmar0602.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_nipmar0601.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Stella-Mccartney524.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_Stella-Mccartney2523.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_sophie0525.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_sophie0525111.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Missoni_Missoni527.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/Missoni-5272.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_marce511.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/MarceloBurlon_title528.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_offwhite514.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_white0514.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_MaxMaraWeekend526.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/MaraMax526.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_MSGM513.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_MSGM2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_golden0531.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_golden0531.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Céline604.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Céline-6041.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_NeilBarrett515.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_barrett0515.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Lanvin514.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_lanvin0514.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_chloe510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_chloe.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/GiuseppeZanottiTitle528.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/GiuseppeZanottiTitle528.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Lanzzo519.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Lanzzo2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Dsquared512.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_dsquared0512.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Pinko519.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Pinko2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Loewe513.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zhen_loewe2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_valentino516.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_valentino0516.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Saint_Laurent519.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_laurent0519.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen-JoshuaSanders605.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/JoshuaSanders-6052.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_n210606.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_n210606.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_thom0602.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_thom0601.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_AmandaWakeley607.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/Amanda-Wakeley-607.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen-JeremyScott605.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/JeremyScott-6052.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Orciani603.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/brand_day2017/Orciani6032.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_ermze511.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/zen_ErmenegildoZegna2.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_alexander516.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_alexander0516.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Dior515.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_dior0515.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Givenchy515.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_givenchy0515.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_NeilBarrett515.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_barrett0515.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Valentino514.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_valentino05147.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_philipp512.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_philipp0512.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_Bvlgari512.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_bvlgari0512.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_dior510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_dior.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_fendi510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_fendi.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_gucci510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_gucci.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_shoes510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_shoes.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_dclce510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_dolce.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_givenchy510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_givenchy.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_bottega510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_bottega.jpg"/>
+            </a>
+        </div>
+        <div class="zhen_part">
+            <a href="https://msale.zhen.com/activity/zhen_burberry510.html">
+                <img class="ui-imglazyload" data-url="https://pic1.zhen.com/appimg/stf819/xuan_burberry.jpg"/>
+            </a>
+        </div>
+        -->
+        <div class="no_more"><span>没有更多了哦</span></div>
+    </div>
+</div>
+<div class="fixd-box" style="-webkit-transform-origin: 0px 0px 0px; opacity: 1; -webkit-transform: scale(1, 1); display: none;"></div>
+<script type="text/javascript" src="https://res.zhen.com/mzhenpin/statics/js/zepto.js"></script>
+<script type="text/javascript" src="https://res.zhen.com/mzhenpin/statics/js/lazyLoad.js"></script>
+<script>
+    (function(para) {
+        var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
+        w['sensorsDataAnalytic201505'] = n;
+        w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
+        var ifs = ['track','quick','register','registerPage','registerOnce','clearAllRegister','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister'];
+        for (var i = 0; i < ifs.length; i++) {
+            w[n][ifs[i]] = w[n].call(null, ifs[i]);
+        }
+        if (!w[n]._t) {
+            x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+            x.async = 1;
+            x.src = p;
+            y.parentNode.insertBefore(x, y);
+            w[n].para = para;
+        }
+    })({
+        sdk_url: 'http://static.sensorsdata.cn/sdk/1.7.1.2/sensorsdata.min.js',
+        name: 'sa',
+        web_url: 'https://zhen.cloud.sensorsdata.cn/?project=production',
+        server_url: 'https://zhen.cloud.sensorsdata.cn:4006/sa?token=9f796d1aa5f08308&project=production',
+        use_app_track: true,
+        heatmap: {}
+    });
+    sa.quick('autoTrack');
+</script>
+<script type="text/javascript">
+    $(function () {
+        var bbbTn = pdTime = quickBtn = cutBtn = bBtn = true, moveTimer = null, iNow = 0, i = 0, bBtnPd = 1,curI= 0,oDate = new Date();
+        $(window).bind("scroll", function () {
+            if(bbbTn){
+                if($(window).scrollTop() >0){
+                    $('.ui-imglazyload').picLazyLoad({threshold : 500});
+                }
+            }
+            bbbTn = false;
+            document.body.scrollTop >= $(window).height() ? $(".fixd-box").show() : $(".fixd-box").hide();
+        });//图片延时加载
+        $(".fixd-box").returnTop();
+        /*返回顶部*/
+        $('#aClose').click(function () {$('.downloadApp').hide();});
+        $('.ui-imglazyload').picLazyLoad({threshold : 500});
+
+
+
+    })
+</script>
+<script>
+    function toSearch(type,id,title,name,gender){
+        if(location.href.indexOf('APP_')>-1){
+            var ua = navigator.userAgent;
+            var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+                    isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+                    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+                    isMobile = isIphone || isAndroid;
+            if(isMobile){
+//或者单独判断iphone或android
+                if(isIphone) {
+                    iosSkipProductList(type,id,title,name,gender);
+                }else if(isAndroid){
+                    window.adObject.androidToProductList(type,id,title,gender);
+                }else{
+//code
+                }
+            }else{
+                window.location.href='https://m.zhen.com/index.php?c=search&brandid='+id;
+            }
+        }else{
+            window.location.href='https://m.zhen.com/index.php?c=search&brandid='+id;
+        }
+    }
+
+</script>
+</body>
+</html>
